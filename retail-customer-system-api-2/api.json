@@ -1,0 +1,1165 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Retail Customer System API",
+    "version": "v2.0"
+  },
+  "host": "localhost:8082",
+  "basePath": "/api",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/customers": {
+      "post": {
+      
+        "parameters": [
+          {
+            "x-amf-mediaType": "application/json",
+            "in": "body",
+            "name": "generated",
+            "schema": {
+              "description": "Contact information",
+              "x-amf-examples": {
+                "example_0": {
+                  "customerId": "provider|0123456789",
+                  "firstName": "John",
+                  "lastName": "Doe",
+                  "phone": "+1-202-555-0180",
+                  "email": "john.doe@example.com",
+                  "deliveryAddresses": [
+                    {
+                      "type": "SHIPPING",
+                      "address": "44 Shirley Ave.",
+                      "city": "West Chicago",
+                      "postalCode": "60185",
+                      "state": "IL",
+                      "country": "USA"
+                    },
+                    {
+                      "type": "BILLING",
+                      "address": "44 Shirley Ave.",
+                      "city": "West Chicago",
+                      "postalCode": "60185",
+                      "state": "IL",
+                      "country": "USA"
+                    }
+                  ]
+                },
+                "example_1": {
+                  "identifier": "sfdc|1234567890",
+                  "customerId": "provider|0123456789",
+                  "firstName": "John",
+                  "lastName": "Doe",
+                  "phone": "+1-202-555-0180",
+                  "email": "john.doe@example.com",
+                  "deliveryAddresses": [
+                    {
+                      "type": "SHIPPING",
+                      "address": "44 Shirley Ave.",
+                      "city": "West Chicago",
+                      "postalCode": "60185",
+                      "state": "IL",
+                      "country": "USA"
+                    },
+                    {
+                      "type": "BILLING",
+                      "address": "44 Shirley Ave.",
+                      "city": "West Chicago",
+                      "postalCode": "60185",
+                      "state": "IL",
+                      "country": "USA"
+                    }
+                  ]
+                },
+                "example_2": {
+                  "customerId": "provider|0123456789",
+                  "firstName": "John",
+                  "lastName": "Dawson",
+                  "phone": "+1-202-555-0180",
+                  "email": "john.dawson@example.com",
+                  "deliveryAddresses": [
+                    {
+                      "type": "SHIPPING",
+                      "address": "44 Shirley Ave.",
+                      "city": "West Chicago",
+                      "postalCode": "60185",
+                      "state": "IL",
+                      "country": "USA"
+                    },
+                    {
+                      "type": "BILLING",
+                      "address": "44 Shirley Ave.",
+                      "city": "West Chicago",
+                      "postalCode": "60185",
+                      "state": "IL",
+                      "country": "USA"
+                    }
+                  ]
+                }
+              },
+              "type": "object",
+              "additionalProperties": true,
+              "required": [
+                "lastName"
+              ],
+              "properties": {
+                "lastName": {
+                  "description": "Last name of the customer",
+                  "type": "string"
+                },
+                "identifier": {
+                  "description": "the unique object identifier exposed to external clients of a service.\nthis is a synthetic key and should NEVER be equal to any internal property\nor key of the object. it is recommended that these values follow\nthe format specified in RFC 4122 [https://www.ietf.org/rfc/rfc4122.txt].\n",
+                  "type": "string"
+                },
+                "firstName": {
+                  "x-amf-union": [
+                    {
+                      "description": "First name of the customer",
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "email": {
+                  "description": "Email address",
+                  "type": "string"
+                },
+                "deliveryAddresses": {
+                  "description": "Customer delivery addresses collection",
+                  "type": "array",
+                  "items": {
+                    "description": "postal address of internal organization\n",
+                    "type": "object",
+                    "additionalProperties": true,
+                    "properties": {
+                      "identifier": {
+                        "type": "string"
+                      },
+                      "mailStopCode": {
+                        "description": "an internal organization mail delivery location\nor box number\n",
+                        "x-amf-union": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "attention": {
+                        "description": "the name of an individual who should receive deliveries on behalf of a recipient organization",
+                        "x-amf-union": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "type": {
+                        "description": "type of address\n",
+                        "enum": [
+                          "BILLING",
+                          "SHIPPING"
+                        ],
+                        "type": "string"
+                      },
+                      "recipient": {
+                        "description": "the name of the party responsible for receiving\ndeliveries to this address\n",
+                        "x-amf-union": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "address": {
+                        "description": "the unit number and street name\n",
+                        "x-amf-union": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "addressUnit": {
+                        "description": "a subdivision within the address, such as an apartment or floor\n",
+                        "type": "string"
+                      },
+                      "secondaryAddress": {
+                        "description": "any additional addressing information needed to describe a\ndelivery location that does not fit within address or\nsecondaryUnit\n",
+                        "x-amf-union": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "city": {
+                        "description": "the municipality of the address\n",
+                        "x-amf-union": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "state": {
+                        "description": "the state or other national region of the address\n",
+                        "x-amf-union": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "postalCode": {
+                        "description": "the delivery code assigned to this address by a national\nor governmental postal agency\n",
+                        "x-amf-union": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "country": {
+                        "description": "the two character ISO 3166 country code\n[http://www.iso.org/iso/home/standards/country_codes.htm]\n",
+                        "default": "US",
+                        "x-amf-union": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                },
+                "customerId": {
+                  "description": "Identifier of customer",
+                  "type": "string"
+                },
+                "phone": {
+                  "description": "Phone number",
+                  "type": "string"
+                },
+                "paymentMethods": {
+                  "description": "Customer payment methods collection",
+                  "type": "array",
+                  "items": {
+                    "description": "payment method\n",
+                    "type": "object",
+                    "additionalProperties": true,
+                    "required": [
+                      "paymentMethodType"
+                    ],
+                    "properties": {
+                      "identifier": {
+                        "type": "string"
+                      },
+                      "paymentMethodType": {
+                        "description": "payment method type\n",
+                        "x-amf-examples": {
+                          "cash": {
+                            "medium": "PHYSICAL",
+                            "issuer": "GOVT",
+                            "name": "Cash"
+                          },
+                          "check": {
+                            "medium": "PHYSICAL",
+                            "issuer": "BANK",
+                            "name": "Check"
+                          },
+                          "visa": {
+                            "medium": "CARD",
+                            "issuer": "BANK",
+                            "name": "Visa"
+                          },
+                          "paypal": {
+                            "medium": "DIGITAL",
+                            "issuer": "INSTITUTION",
+                            "name": "PayPal"
+                          }
+                        },
+                        "type": "object",
+                        "additionalProperties": true,
+                        "properties": {
+                          "medium": {
+                            "x-amf-union": [
+                              {
+                                "description": "payment type\n",
+                                "enum": [
+                                  "PHYSICAL",
+                                  "DIGITAL",
+                                  "VOUCHER",
+                                  "COUPON",
+                                  "CERTIFICATE",
+                                  "DOCUMENT",
+                                  "CARD",
+                                  "ACCOUNT"
+                                ],
+                                "type": "string"
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ]
+                          },
+                          "issuer": {
+                            "x-amf-union": [
+                              {
+                                "description": "issuer type\n",
+                                "enum": [
+                                  "GOVT",
+                                  "BANK",
+                                  "MANUFACTURER",
+                                  "BRAND",
+                                  "DOCUMENT",
+                                  "INSTITUTION"
+                                ],
+                                "type": "string"
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ]
+                          },
+                          "name": {
+                            "x-amf-union": [
+                              {
+                                "type": "string"
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "x-amf-mediaType": "application/json",
+            "schema": {
+              "example": {
+                "identifier": "8658743y89348295838",
+                "customerId": "provider|0123456789"
+              },
+              "type": "object",
+              "additionalProperties": true,
+              "required": [
+                "identifier",
+                "customerId"
+              ],
+              "properties": {
+                "identifier": {
+                  "type": "string"
+                },
+                "customerId": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/customers/{customerId}": {
+      "get": {
+        "parameters": [
+          {
+            "name": "customerId",
+            "required": true,
+            "in": "path",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "x-amf-mediaType": "application/json",
+            "schema": {
+              "description": "Contact information",
+              "x-amf-examples": {
+                "example_0": {
+                  "customerId": "provider|0123456789",
+                  "firstName": "John",
+                  "lastName": "Doe",
+                  "phone": "+1-202-555-0180",
+                  "email": "john.doe@example.com",
+                  "deliveryAddresses": [
+                    {
+                      "type": "SHIPPING",
+                      "address": "44 Shirley Ave.",
+                      "city": "West Chicago",
+                      "postalCode": "60185",
+                      "state": "IL",
+                      "country": "USA"
+                    },
+                    {
+                      "type": "BILLING",
+                      "address": "44 Shirley Ave.",
+                      "city": "West Chicago",
+                      "postalCode": "60185",
+                      "state": "IL",
+                      "country": "USA"
+                    }
+                  ]
+                },
+                "example_1": {
+                  "identifier": "sfdc|1234567890",
+                  "customerId": "provider|0123456789",
+                  "firstName": "John",
+                  "lastName": "Doe",
+                  "phone": "+1-202-555-0180",
+                  "email": "john.doe@example.com",
+                  "deliveryAddresses": [
+                    {
+                      "type": "SHIPPING",
+                      "address": "44 Shirley Ave.",
+                      "city": "West Chicago",
+                      "postalCode": "60185",
+                      "state": "IL",
+                      "country": "USA"
+                    },
+                    {
+                      "type": "BILLING",
+                      "address": "44 Shirley Ave.",
+                      "city": "West Chicago",
+                      "postalCode": "60185",
+                      "state": "IL",
+                      "country": "USA"
+                    }
+                  ]
+                },
+                "example_2": {
+                  "customerId": "provider|0123456789",
+                  "firstName": "John",
+                  "lastName": "Dawson",
+                  "phone": "+1-202-555-0180",
+                  "email": "john.dawson@example.com",
+                  "deliveryAddresses": [
+                    {
+                      "type": "SHIPPING",
+                      "address": "44 Shirley Ave.",
+                      "city": "West Chicago",
+                      "postalCode": "60185",
+                      "state": "IL",
+                      "country": "USA"
+                    },
+                    {
+                      "type": "BILLING",
+                      "address": "44 Shirley Ave.",
+                      "city": "West Chicago",
+                      "postalCode": "60185",
+                      "state": "IL",
+                      "country": "USA"
+                    }
+                  ]
+                }
+              },
+              "type": "object",
+              "additionalProperties": true,
+              "required": [
+                "lastName"
+              ],
+              "properties": {
+                "lastName": {
+                  "description": "Last name of the customer",
+                  "type": "string"
+                },
+                "identifier": {
+                  "description": "the unique object identifier exposed to external clients of a service.\nthis is a synthetic key and should NEVER be equal to any internal property\nor key of the object. it is recommended that these values follow\nthe format specified in RFC 4122 [https://www.ietf.org/rfc/rfc4122.txt].\n",
+                  "type": "string"
+                },
+                "firstName": {
+                  "x-amf-union": [
+                    {
+                      "description": "First name of the customer",
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "email": {
+                  "description": "Email address",
+                  "type": "string"
+                },
+                "deliveryAddresses": {
+                  "description": "Customer delivery addresses collection",
+                  "type": "array",
+                  "items": {
+                    "description": "postal address of internal organization\n",
+                    "type": "object",
+                    "additionalProperties": true,
+                    "properties": {
+                      "identifier": {
+                        "type": "string"
+                      },
+                      "mailStopCode": {
+                        "description": "an internal organization mail delivery location\nor box number\n",
+                        "x-amf-union": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "attention": {
+                        "description": "the name of an individual who should receive deliveries on behalf of a recipient organization",
+                        "x-amf-union": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "type": {
+                        "description": "type of address\n",
+                        "enum": [
+                          "BILLING",
+                          "SHIPPING"
+                        ],
+                        "type": "string"
+                      },
+                      "recipient": {
+                        "description": "the name of the party responsible for receiving\ndeliveries to this address\n",
+                        "x-amf-union": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "address": {
+                        "description": "the unit number and street name\n",
+                        "x-amf-union": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "addressUnit": {
+                        "description": "a subdivision within the address, such as an apartment or floor\n",
+                        "type": "string"
+                      },
+                      "secondaryAddress": {
+                        "description": "any additional addressing information needed to describe a\ndelivery location that does not fit within address or\nsecondaryUnit\n",
+                        "x-amf-union": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "city": {
+                        "description": "the municipality of the address\n",
+                        "x-amf-union": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "state": {
+                        "description": "the state or other national region of the address\n",
+                        "x-amf-union": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "postalCode": {
+                        "description": "the delivery code assigned to this address by a national\nor governmental postal agency\n",
+                        "x-amf-union": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "country": {
+                        "description": "the two character ISO 3166 country code\n[http://www.iso.org/iso/home/standards/country_codes.htm]\n",
+                        "default": "US",
+                        "x-amf-union": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                },
+                "customerId": {
+                  "description": "Identifier of customer",
+                  "type": "string"
+                },
+                "phone": {
+                  "description": "Phone number",
+                  "type": "string"
+                },
+                "paymentMethods": {
+                  "description": "Customer payment methods collection",
+                  "type": "array",
+                  "items": {
+                    "description": "payment method\n",
+                    "type": "object",
+                    "additionalProperties": true,
+                    "required": [
+                      "paymentMethodType"
+                    ],
+                    "properties": {
+                      "identifier": {
+                        "type": "string"
+                      },
+                      "paymentMethodType": {
+                        "description": "payment method type\n",
+                        "x-amf-examples": {
+                          "cash": {
+                            "medium": "PHYSICAL",
+                            "issuer": "GOVT",
+                            "name": "Cash"
+                          },
+                          "check": {
+                            "medium": "PHYSICAL",
+                            "issuer": "BANK",
+                            "name": "Check"
+                          },
+                          "visa": {
+                            "medium": "CARD",
+                            "issuer": "BANK",
+                            "name": "Visa"
+                          },
+                          "paypal": {
+                            "medium": "DIGITAL",
+                            "issuer": "INSTITUTION",
+                            "name": "PayPal"
+                          }
+                        },
+                        "type": "object",
+                        "additionalProperties": true,
+                        "properties": {
+                          "medium": {
+                            "x-amf-union": [
+                              {
+                                "description": "payment type\n",
+                                "enum": [
+                                  "PHYSICAL",
+                                  "DIGITAL",
+                                  "VOUCHER",
+                                  "COUPON",
+                                  "CERTIFICATE",
+                                  "DOCUMENT",
+                                  "CARD",
+                                  "ACCOUNT"
+                                ],
+                                "type": "string"
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ]
+                          },
+                          "issuer": {
+                            "x-amf-union": [
+                              {
+                                "description": "issuer type\n",
+                                "enum": [
+                                  "GOVT",
+                                  "BANK",
+                                  "MANUFACTURER",
+                                  "BRAND",
+                                  "DOCUMENT",
+                                  "INSTITUTION"
+                                ],
+                                "type": "string"
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ]
+                          },
+                          "name": {
+                            "x-amf-union": [
+                              {
+                                "type": "string"
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      },
+      "put": {
+        
+        "parameters": [
+          {
+            "name": "customerId",
+            "required": true,
+            "in": "path",
+            "type": "string"
+          },
+          {
+            "x-amf-mediaType": "application/json",
+            "in": "body",
+            "name": "generated",
+            "schema": {
+              "description": "Contact information",
+              "x-amf-examples": {
+                "example_0": {
+                  "customerId": "provider|0123456789",
+                  "firstName": "John",
+                  "lastName": "Doe",
+                  "phone": "+1-202-555-0180",
+                  "email": "john.doe@example.com",
+                  "deliveryAddresses": [
+                    {
+                      "type": "SHIPPING",
+                      "address": "44 Shirley Ave.",
+                      "city": "West Chicago",
+                      "postalCode": "60185",
+                      "state": "IL",
+                      "country": "USA"
+                    },
+                    {
+                      "type": "BILLING",
+                      "address": "44 Shirley Ave.",
+                      "city": "West Chicago",
+                      "postalCode": "60185",
+                      "state": "IL",
+                      "country": "USA"
+                    }
+                  ]
+                },
+                "example_1": {
+                  "identifier": "sfdc|1234567890",
+                  "customerId": "provider|0123456789",
+                  "firstName": "John",
+                  "lastName": "Doe",
+                  "phone": "+1-202-555-0180",
+                  "email": "john.doe@example.com",
+                  "deliveryAddresses": [
+                    {
+                      "type": "SHIPPING",
+                      "address": "44 Shirley Ave.",
+                      "city": "West Chicago",
+                      "postalCode": "60185",
+                      "state": "IL",
+                      "country": "USA"
+                    },
+                    {
+                      "type": "BILLING",
+                      "address": "44 Shirley Ave.",
+                      "city": "West Chicago",
+                      "postalCode": "60185",
+                      "state": "IL",
+                      "country": "USA"
+                    }
+                  ]
+                },
+                "example_2": {
+                  "customerId": "provider|0123456789",
+                  "firstName": "John",
+                  "lastName": "Dawson",
+                  "phone": "+1-202-555-0180",
+                  "email": "john.dawson@example.com",
+                  "deliveryAddresses": [
+                    {
+                      "type": "SHIPPING",
+                      "address": "44 Shirley Ave.",
+                      "city": "West Chicago",
+                      "postalCode": "60185",
+                      "state": "IL",
+                      "country": "USA"
+                    },
+                    {
+                      "type": "BILLING",
+                      "address": "44 Shirley Ave.",
+                      "city": "West Chicago",
+                      "postalCode": "60185",
+                      "state": "IL",
+                      "country": "USA"
+                    }
+                  ]
+                }
+              },
+              "type": "object",
+              "additionalProperties": true,
+              "required": [
+                "lastName"
+              ],
+              "properties": {
+                "lastName": {
+                  "description": "Last name of the customer",
+                  "type": "string"
+                },
+                "identifier": {
+                  "description": "the unique object identifier exposed to external clients of a service.\nthis is a synthetic key and should NEVER be equal to any internal property\nor key of the object. it is recommended that these values follow\nthe format specified in RFC 4122 [https://www.ietf.org/rfc/rfc4122.txt].\n",
+                  "type": "string"
+                },
+                "firstName": {
+                  "x-amf-union": [
+                    {
+                      "description": "First name of the customer",
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "email": {
+                  "description": "Email address",
+                  "type": "string"
+                },
+                "deliveryAddresses": {
+                  "description": "Customer delivery addresses collection",
+                  "type": "array",
+                  "items": {
+                    "description": "postal address of internal organization\n",
+                    "type": "object",
+                    "additionalProperties": true,
+                    "properties": {
+                      "identifier": {
+                        "type": "string"
+                      },
+                      "mailStopCode": {
+                        "description": "an internal organization mail delivery location\nor box number\n",
+                        "x-amf-union": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "attention": {
+                        "description": "the name of an individual who should receive deliveries on behalf of a recipient organization",
+                        "x-amf-union": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "type": {
+                        "description": "type of address\n",
+                        "enum": [
+                          "BILLING",
+                          "SHIPPING"
+                        ],
+                        "type": "string"
+                      },
+                      "recipient": {
+                        "description": "the name of the party responsible for receiving\ndeliveries to this address\n",
+                        "x-amf-union": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "address": {
+                        "description": "the unit number and street name\n",
+                        "x-amf-union": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "addressUnit": {
+                        "description": "a subdivision within the address, such as an apartment or floor\n",
+                        "type": "string"
+                      },
+                      "secondaryAddress": {
+                        "description": "any additional addressing information needed to describe a\ndelivery location that does not fit within address or\nsecondaryUnit\n",
+                        "x-amf-union": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "city": {
+                        "description": "the municipality of the address\n",
+                        "x-amf-union": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "state": {
+                        "description": "the state or other national region of the address\n",
+                        "x-amf-union": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "postalCode": {
+                        "description": "the delivery code assigned to this address by a national\nor governmental postal agency\n",
+                        "x-amf-union": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "country": {
+                        "description": "the two character ISO 3166 country code\n[http://www.iso.org/iso/home/standards/country_codes.htm]\n",
+                        "default": "US",
+                        "x-amf-union": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                },
+                "customerId": {
+                  "description": "Identifier of customer",
+                  "type": "string"
+                },
+                "phone": {
+                  "description": "Phone number",
+                  "type": "string"
+                },
+                "paymentMethods": {
+                  "description": "Customer payment methods collection",
+                  "type": "array",
+                  "items": {
+                    "description": "payment method\n",
+                    "type": "object",
+                    "additionalProperties": true,
+                    "required": [
+                      "paymentMethodType"
+                    ],
+                    "properties": {
+                      "identifier": {
+                        "type": "string"
+                      },
+                      "paymentMethodType": {
+                        "description": "payment method type\n",
+                        "x-amf-examples": {
+                          "cash": {
+                            "medium": "PHYSICAL",
+                            "issuer": "GOVT",
+                            "name": "Cash"
+                          },
+                          "check": {
+                            "medium": "PHYSICAL",
+                            "issuer": "BANK",
+                            "name": "Check"
+                          },
+                          "visa": {
+                            "medium": "CARD",
+                            "issuer": "BANK",
+                            "name": "Visa"
+                          },
+                          "paypal": {
+                            "medium": "DIGITAL",
+                            "issuer": "INSTITUTION",
+                            "name": "PayPal"
+                          }
+                        },
+                        "type": "object",
+                        "additionalProperties": true,
+                        "properties": {
+                          "medium": {
+                            "x-amf-union": [
+                              {
+                                "description": "payment type\n",
+                                "enum": [
+                                  "PHYSICAL",
+                                  "DIGITAL",
+                                  "VOUCHER",
+                                  "COUPON",
+                                  "CERTIFICATE",
+                                  "DOCUMENT",
+                                  "CARD",
+                                  "ACCOUNT"
+                                ],
+                                "type": "string"
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ]
+                          },
+                          "issuer": {
+                            "x-amf-union": [
+                              {
+                                "description": "issuer type\n",
+                                "enum": [
+                                  "GOVT",
+                                  "BANK",
+                                  "MANUFACTURER",
+                                  "BRAND",
+                                  "DOCUMENT",
+                                  "INSTITUTION"
+                                ],
+                                "type": "string"
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ]
+                          },
+                          "name": {
+                            "x-amf-union": [
+                              {
+                                "type": "string"
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "x-amf-mediaType": "application/json",
+            "schema": {
+              "example": {
+                "status": "OK"
+              },
+              "type": "object",
+              "additionalProperties": true,
+              "required": [
+                "status"
+              ],
+              "properties": {
+                "status": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      },
+      "delete": {
+        "parameters": [
+          {
+            "name": "customerId",
+            "required": true,
+            "in": "path",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "x-amf-mediaType": "application/json",
+            "schema": {
+              "example": {
+                "status": "OK"
+              },
+              "type": "object",
+              "additionalProperties": true,
+              "required": [
+                "status"
+              ],
+              "properties": {
+                "status": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    }
+  }
+}
